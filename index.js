@@ -33,11 +33,12 @@ function allClear() {
 
 function appendDigit(digit) {
     if (display.textContent.length >= 11) return;
-    if (display.textContent === '0' || previousOperand !== "") {
+    if (display.textContent === '0' || (operator && previousOperand === display.textContent)) {
         display.textContent = digit;
     } else {
         display.textContent += digit;
     }
+    console.log(display.textContent);
 }
 
 function setOperation(op){
@@ -53,11 +54,10 @@ function setOperation(op){
 }
 
 function operate() {
-    currentOperand = display.innerText;
-    if (operator === null || currentOperand === '') return;
+    if (operator === null || display.innerText === '') return;
     let result;
     const prev = parseFloat(previousOperand);
-    const current = parseFloat(currentOperand);
+    const current = parseFloat(display.innerText);
     switch (operator) {
         case "+":
             result = prev + current;
